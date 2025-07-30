@@ -16,8 +16,18 @@ export async function fetchSensorsWithLastValue() {
     return result;
 }
 
-export function sortSensorsByName(sensors) {
-    return [...sensors].sort((a, b) =>
-        a.name.localeCompare(b.name)
-    );
+export function sortSensorsBy(sensors, field) {
+    return [...sensors].sort((a, b) => {
+        const valA = a[field];
+        const valB = b[field];
+
+        if (typeof valA === 'string' && typeof valB === 'string') {
+            return valA.localeCompare(valB);
+        } else if (typeof valA !== typeof valB) {
+            alert('Error sorting values: check your data.');
+            return;
+        }
+
+        return valA > valB ? 1 : valA < valB ? -1 : 0;
+    });
 }
