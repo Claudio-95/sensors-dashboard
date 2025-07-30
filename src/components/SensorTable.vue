@@ -11,7 +11,6 @@
     </thead>
     <tbody>
       <tr v-for="sensor in sortedSensors" :key="sensor.id" class="hover:bg-gray-50 cursor-pointer" @click="$emit('select', sensor.id)">
-        <td class="border px-4 py-2">{{ sensor.id }}</td>
         <td class="border px-4 py-2">{{ sensor.name }}</td>
         <td class="border px-4 py-2"> {{ sensor.location }}</td>
         <td class="border px-4 py-2"> {{ sensor.lastValue }}</td>
@@ -25,7 +24,7 @@
   </table>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { ref, onMounted } from 'vue';
   import { fetchSensorsWithLastValue, sortSensorsByName } from './table.js';
 

@@ -14,7 +14,7 @@
   </main>
 </template>
 
-<script lang="ts">
+<script>
   import SensorTable from './components/SensorTable.vue';
   import SensorChart from './components/SensorChart.vue';
   import { defineComponent, ref } from 'vue';
@@ -24,7 +24,7 @@
     setup() {
       const selectedSensor = ref(null);
 
-      const handleSensorSelect = (sensor: any) => {
+      const handleSensorSelect = (sensor) => {
         selectedSensor.value = sensor
       };
 

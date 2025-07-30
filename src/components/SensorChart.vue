@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <h2 class="text-lg font-semibold mb-2"></h2>
+  <div class="mt-6">
+    <div ref="chartEl" class="w-full h-96"></div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 
 </script>
