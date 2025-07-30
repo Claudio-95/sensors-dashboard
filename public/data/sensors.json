@@ -1,0 +1,20 @@
+[
+  {
+    "id": "SEN-001",
+    "name": "Bridge A - North Span",
+    "location": "Milan",
+    "threshold": 3.5
+  },
+  {
+    "id": "SEN-002",
+    "name": "Tunnel X - Section 4",
+    "location": "Lucca",
+    "threshold": 2.0
+  },
+  {
+    "id": "SEN-003",
+    "name": "Bridge B - South Pylon",
+    "location": "Rome",
+    "threshold": 4.0
+  }
+]

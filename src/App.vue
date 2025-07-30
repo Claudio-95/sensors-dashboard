@@ -1,15 +1,6 @@
-<script setup lang="ts">
-import SensorTable from './components/SensorTable.vue'
-import SensorChart from './components/SensorChart.vue'
-</script>
-
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <SensorTable msg="You did it!" />
-    </div>
   </header>
 
   <main>
@@ -17,12 +8,29 @@ import SensorChart from './components/SensorChart.vue'
       <h1 class="text-2xl font-bold">
         Sensor Dashboard
       </h1>
-      <SensorTable />
-      <SensorChart />
+      <SensorTable @select="handleSensorSelect"/>
+      <SensorChart v-if="selectedSensor" :sensor-id="selectedSensor"/>
     </div>
   </main>
 </template>
 
-<style scoped>
+<script lang="ts">
+  import SensorTable from './components/SensorTable.vue';
+  import SensorChart from './components/SensorChart.vue';
+  import { defineComponent, ref } from 'vue';
 
-</style>
+  export default defineComponent({
+    components: { SensorTable, SensorChart },
+    setup() {
+      const selectedSensor = ref(null);
+
+      const handleSensorSelect = (sensor: any) => {
+        selectedSensor.value = sensor
+      };
+
+      return {
+        selectedSensor, handleSensorSelect
+      };
+    }
+  })
+</script>
