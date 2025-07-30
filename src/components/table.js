@@ -10,7 +10,7 @@ export async function fetchSensorsWithLastValue() {
         result.push({
             ...sensor,
             lastValue: last?.disp_mm ?? null
-        })
+        });
     }
 
     return result;
