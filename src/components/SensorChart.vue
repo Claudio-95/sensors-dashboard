@@ -5,5 +5,24 @@
 </template>
 
 <script setup>
+  import { ref, onMounted, watch } from 'vue';
+  import { drawChart } from "@/components/charts.js";
 
+  const props = defineProps({
+    sensorId: String
+  });
+
+  const chartEl = ref(null);
+
+  watch(() => props.sensorId, async () => {
+    if (props.sensorId) {
+      await drawChart(chartEl.value, props.sensorId);
+    }
+  });
+
+  onMounted(() => {
+    if (props.sensorId) {
+      drawChart(chartEl.value, props.sensorId);
+    }
+  });
 </script>

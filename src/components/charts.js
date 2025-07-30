@@ -1,4 +1,4 @@
-import Plotly from 'plotly.js';
+import Plotly from 'plotly.js-dist-min';
 import { getMeasurements } from '../../public/api/measurements/mockMeasurements.js';
 
 import sensors from '../../public/data/sensors.json';
