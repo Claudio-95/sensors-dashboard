@@ -9,7 +9,9 @@ export async function drawChart(container, sensorId) {
 
     const timestamp_X = measurements.map(m => m.timestamp);
     timestamp_X.sort((a, b) => new Date(a) - new Date(b));
-    const disp_mm_Y = measurements.map(m => m.disp_mm);
+
+    const belowThreshold = measurements.filter(m => m.disp_mm <= sensor.threshold);
+    const aboveThreshold = measurements.filter(m => m.disp_mm > sensor.threshold);
 
     const thresholdLine = {
         x: timestamp_X,
@@ -19,18 +21,35 @@ export async function drawChart(container, sensorId) {
         line: { dash: 'line', color: 'red'}
     };
 
-    const dataLine = {
-        x: timestamp_X,
-        y: disp_mm_Y,
+    const dataBelow = {
+        x: belowThreshold.map(m => m.timestamp),
+        y: belowThreshold.map(m => m.disp_mm),
         mode: 'markers',
         name: 'disp_mm',
         marker: {
-            color: disp_mm_Y.map(val => val > sensor.threshold ? 'red' : 'blue'),
+            color: 'blue',
             size: 6
-        }
-    }
+        },
+        type: 'scatter'
+    };
 
-    await Plotly.newPlot(container, [dataLine, thresholdLine], {
-        margin: { t: 20}
+    const dataAbove = {
+        x: aboveThreshold.map(m => m.timestamp),
+        y: aboveThreshold.map(m => m.disp_mm),
+        mode: 'markers',
+        name: 'disp_mm',
+        marker: {
+            color: 'red',
+            size: 8
+        },
+        type: 'scatter'
+    };
+
+    await Plotly.newPlot(container, [dataBelow, dataAbove, thresholdLine], {
+        margin: { t: 20},
+        xaxis: {
+            tickformat: "%B %d, %H:%M",
+            automargin: true
+        }
     }, { responsive: true });
 }

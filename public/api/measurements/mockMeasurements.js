@@ -5,10 +5,7 @@ export async function getMeasurements(sensorId) {
     const threeDaysAgo = Date.now() - 3 * 24 * 60 * 60 * 1000;
 
     const measurements = data.measurements.filter(m => {
-        return {
-            "date": new Date(m.timestamp).getTime() >= threeDaysAgo,
-            "disp_mm": m.disp_mm
-        };
+        return new Date(m.timestamp).getTime() >= threeDaysAgo;
     });
 
     return {

@@ -5,8 +5,9 @@ export async function fetchSensorsWithLastValue() {
     const result = []
 
     for (const sensor of sensorsData) {
-        const data = await getMeasurements(sensor.id);
-        const last = data.measurements.at(-1);
+        const { measurements } = await getMeasurements(sensor.id);
+        measurements.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+        const last = measurements.at(-1);
         result.push({
             ...sensor,
             lastValue: last?.disp_mm ?? null
