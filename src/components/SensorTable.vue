@@ -3,10 +3,18 @@
     <table class="w-full table-auto mt-4 border">
       <thead>
         <tr class="bg-gray-100">
-          <th class="px-4 py-2 cursor-pointer" @click="sortBy('id')">ID</th>
-          <th class="px-4 py-2 cursor-pointer" @click="sortBy('name')">Name</th>
-          <th class="px-4 py-2 cursor-pointer" @click="sortBy('location')">Location</th>
-          <th class="px-4 py-2 cursor-pointer" @click="sortBy('lastValue')">Last Value</th>
+          <th class="px-4 py-2 cursor-pointer" @click="sortBy('id')">ID
+            <i :class="sortIcon('id')" class="ml-1"></i>
+          </th>
+          <th class="px-4 py-2 cursor-pointer" @click="sortBy('name')">Name
+            <i :class="sortIcon('name')" class="ml-1"></i>
+          </th>
+          <th class="px-4 py-2 cursor-pointer" @click="sortBy('location')">Location
+            <i :class="sortIcon('location')" class="ml-1"></i>
+          </th>
+          <th class="px-4 py-2 cursor-pointer" @click="sortBy('lastValue')">Last Value
+            <i :class="sortIcon('lastValue')" class="ml-1"></i>
+          </th>
           <th class="px-4 py-2">Status</th>
         </tr>
       </thead>
@@ -33,6 +41,8 @@
 
   const sensors = ref([]);
   const sortedSensors = ref([]);
+  const sortField = ref(null);
+  const sortDirection = ref('asc');
 
   async function load() {
     sensors.value = await fetchSensorsWithLastValue();
@@ -40,7 +50,23 @@
   }
 
   function sortBy(field) {
-    sortedSensors.value = sortSensorsBy(sortedSensors.value, field);
+    if (sortField.value === field) {
+      sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc';
+    } else {
+      sortField.value = field;
+      sortDirection.value = 'asc';
+    }
+
+    sortedSensors.value = sortSensorsBy(sortedSensors.value, field, sortDirection.value);
+  }
+
+  function sortIcon(field) {
+    if (sortField.value !== field) {
+      return 'fas fa-sort text-gray-400';
+    }
+    return sortDirection.value === 'asc'
+        ? 'fas fa-sort-up text-blue-600'
+        : 'fas fa-sort-down text-blue-600';
   }
 
   onMounted(load);

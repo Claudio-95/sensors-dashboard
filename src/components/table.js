@@ -17,18 +17,21 @@ export async function fetchSensorsWithLastValue() {
     return result;
 }
 
-export function sortSensorsBy(sensors, field) {
+export function sortSensorsBy(sensors, field, direction = 'asc') {
     return [...sensors].sort((a, b) => {
         const valA = a[field];
         const valB = b[field];
 
         if (typeof valA === 'string' && typeof valB === 'string') {
-            return valA.localeCompare(valB);
+            return direction === 'asc'
+                ? valA.localeCompare(valB)
+                : valB.localeCompare(valA);
         } else if (typeof valA !== typeof valB) {
             alert('Error sorting values: check your data.');
             return;
         }
 
-        return valA > valB ? 1 : valA < valB ? -1 : 0;
+        if (valA === valB) return 0;
+        return direction === 'asc' ? (valA > valB ? 1 : -1) : (valA < valB ? 1 : -1);
     });
 }

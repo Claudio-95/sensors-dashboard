@@ -1,12 +1,20 @@
 <template>
-  <header>
+  <head>
+    <title>Sensor dashboard</title>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
+  <header>
+    <!-- empty header -->
   </header>
 
   <main>
     <div class="p-4 space-y-8">
       <h1 class="text-2xl font-bold">
-        Sensor Dashboard
+        Dashboard
       </h1>
       <SensorTable @select="handleSensorSelect"/>
       <SensorChart v-if="selectedSensor" :sensor-id="selectedSensor"/>
