@@ -7,7 +7,7 @@
           <th class="px-4 py-2 cursor-pointer" @click="sortBy('name')">Name</th>
           <th class="px-4 py-2 cursor-pointer" @click="sortBy('location')">Location</th>
           <th class="px-4 py-2 cursor-pointer" @click="sortBy('lastValue')">Last Value</th>
-          <th class="px-4 py-2 cursor-pointer">Status</th>
+          <th class="px-4 py-2">Status</th>
         </tr>
       </thead>
       <tbody>

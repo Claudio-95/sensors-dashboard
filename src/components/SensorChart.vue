@@ -12,7 +12,7 @@
     sensorId: String
   });
 
-  const chartEl = ref(null);
+  const chartEl = ref(document.getElementById("chartEl"));
 
   watch(() => props.sensorId, async () => {
     if (props.sensorId) {
