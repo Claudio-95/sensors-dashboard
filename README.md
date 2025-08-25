@@ -1,4 +1,4 @@
-# sensors-dashboard
+# Sensor dashboard
 
 The Vue example project shows a dashboard containing data collected from three different sensors.
 
